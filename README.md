@@ -12,14 +12,6 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-- **Set env**
-
-Copy `env.template` to `.env` and fill in your key:
-
-```bash
-cp env.template .env
-```
-
 - **Start**
 
 ```bash
@@ -28,8 +20,6 @@ streamlit run app.py
 
 ### Deploy (recommended): Streamlit Community Cloud
 
-Vercel is not a good fit for hosting Streamlit itself (Streamlit needs a long-running server). The simplest deployment is:
-
 - **Deploy Streamlit**: Streamlit Community Cloud
   - App file: `app.py`
   - Python deps: `requirements.txt`
@@ -37,20 +27,3 @@ Vercel is not a good fit for hosting Streamlit itself (Streamlit needs a long-ru
 
 After deploy you’ll get a URL like:
 - `https://your-app-name.streamlit.app`
-
-### Deploy on Vercel (as a wrapper)
-
-This repo includes a tiny Vercel serverless endpoint that serves an HTML page and **embeds your Streamlit app in an iframe**.
-
-- **What Vercel runs**: `api/index.py` (simple HTML)
-- **What Vercel does NOT run**: Streamlit
-- **Note**: Vercel uses `api/requirements.txt` (minimal) so it won’t try to install Streamlit/OpenCV during the Vercel build.
-
-Steps:
-
-- **Import to Vercel**: create a new Vercel project from this repo
-- **Set env var in Vercel**:
-  - `STREAMLIT_APP_URL=https://your-app-name.streamlit.app`
-- **Deploy**
-
-When you open your Vercel URL, it will show the Streamlit app inside the page.
