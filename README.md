@@ -44,6 +44,7 @@ This repo includes a tiny Vercel serverless endpoint that serves an HTML page an
 
 - **What Vercel runs**: `api/index.py` (simple HTML)
 - **What Vercel does NOT run**: Streamlit
+- **Note**: Vercel uses `api/requirements.txt` (minimal) so it won’t try to install Streamlit/OpenCV during the Vercel build.
 
 Steps:
 

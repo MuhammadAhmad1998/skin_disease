@@ -1,0 +1,2 @@
+# Vercel only runs api/index.py (an HTML wrapper). It does not need Streamlit/OpenCV.
+
