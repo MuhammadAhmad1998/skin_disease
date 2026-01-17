@@ -5,12 +5,16 @@ import numpy as np
 import cv2
 from openai import OpenAI
 from PIL import Image
-import openai,os,re
+import os, re
 from io import BytesIO
-from dotenv import load_dotenv
-load_dotenv()
-OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
-client = OpenAI(api_key=OPENAI_API_KEY)
+
+# Get API key from Streamlit secrets (for cloud) or environment variable (for local)
+def get_openai_client():
+    api_key = st.secrets.get("OPENAI_API_KEY") if "OPENAI_API_KEY" in st.secrets else os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        st.error("⚠️ OpenAI API key not found. Please set OPENAI_API_KEY in Streamlit secrets.")
+        st.stop()
+    return OpenAI(api_key=api_key)
 def encode_image(image):
     # Resize and encode the image to base64
     img = Image.fromarray(image)
@@ -64,7 +68,7 @@ def get_openai_response(image, user_symptoms):
         """
     
     # Send the request to OpenAI
-    
+    client = get_openai_client()
     completion = client.chat.completions.create(
         model="gpt-4o",
         messages=[
